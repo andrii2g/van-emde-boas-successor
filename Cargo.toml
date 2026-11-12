@@ -1,0 +1,15 @@
+[package]
+name = "van-emde-boas-successor"
+version = "0.1.0"
+edition = "2024"
+description = "A measurable van Emde Boas integer set with deterministic verification and SVG diagrams"
+
+[lib]
+name = "veb_successor"
+path = "src/lib.rs"
+
+[[bin]]
+name = "veb"
+path = "src/main.rs"
+
+[dependencies]
