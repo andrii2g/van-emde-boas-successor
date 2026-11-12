@@ -131,7 +131,7 @@ impl VebSet {
     /// Checks every node, summary membership, extrema, and the root length.
     /// This traverses the allocated hierarchy and is intentionally O(U).
     pub fn validate(&self) -> Result<(), String> {
-        let count = self.root.validate("root")?;
+        let count = self.root.validate()?;
         if count != self.len {
             return Err(format!("root length: expected {}, found {count}", self.len));
         }
@@ -305,8 +305,8 @@ impl Node {
         }
     }
 
-    fn validate(&self, path: &str) -> Result<usize, String> {
-        let fail = |message: &str| format!("{path} (U={}): {message}", self.universe);
+    fn validate(&self) -> Result<usize, String> {
+        let fail = |message: &str| format!("U={}: {message}", self.universe);
         if self.min.is_some() != self.max.is_some() {
             return Err(fail("only one extremum exists"));
         }
@@ -323,11 +323,15 @@ impl Node {
             });
         }
         let summary = self.summary.as_ref().unwrap();
-        summary.validate(&format!("{path}/summary"))?;
+        summary
+            .validate()
+            .map_err(|error| format!("summary/{error}"))?;
         let mut count = usize::from(self.min.is_some());
         let mut actual_max = self.min;
         for (i, cluster) in self.clusters.iter().enumerate() {
-            count += cluster.validate(&format!("{path}/cluster[{i}]"))?;
+            count += cluster
+                .validate()
+                .map_err(|error| format!("cluster[{i}]/{error}"))?;
             if summary.contains(i as u32) != cluster.min.is_some() {
                 return Err(fail("summary membership differs from cluster occupancy"));
             }

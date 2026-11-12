@@ -5,5 +5,6 @@
 //! except cached minimum, maximum, and length, which are O(1).
 
 mod veb;
+pub mod workload;
 
 pub use veb::{KeyError, UniverseError, VebSet};
