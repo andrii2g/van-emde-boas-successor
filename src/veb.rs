@@ -1,4 +1,15 @@
+use crate::metrics::{Counters, Metrics, Probe, Storage};
 use std::{error::Error, fmt};
+
+macro_rules! dispatch {
+    ($set:ident, $method:ident, $key:expr) => {
+        if $set.counters.enabled {
+            $set.root.$method($key, Probe::<true>::new(&$set.counters))
+        } else {
+            $set.root.$method($key, Probe::<false>::new(&$set.counters))
+        }
+    };
+}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct UniverseError(pub u32);
@@ -32,6 +43,7 @@ impl Error for KeyError {}
 pub struct VebSet {
     pub(crate) root: Node,
     len: usize,
+    counters: Counters,
 }
 
 #[derive(Debug)]
@@ -52,6 +64,7 @@ impl VebSet {
         Ok(Self {
             root: Node::new(universe),
             len: 0,
+            counters: Counters::default(),
         })
     }
 
@@ -65,49 +78,76 @@ impl VebSet {
         self.len == 0
     }
     pub fn minimum(&self) -> Option<u32> {
+        self.counters.operation(5);
         self.root.min
     }
     pub fn maximum(&self) -> Option<u32> {
+        self.counters.operation(6);
         self.root.max
     }
 
     /// Returns false if the key was already present.
     pub fn insert(&mut self, key: u32) -> Result<bool, KeyError> {
+        self.counters.operation(0);
         self.check_key(key)?;
-        if self.root.contains(key) {
+        if dispatch!(self, contains, key) {
             return Ok(false);
         }
-        self.root.insert(key);
+        dispatch!(self, insert, key);
         self.len += 1;
         Ok(true)
     }
 
     /// Returns false if the key was absent.
     pub fn remove(&mut self, key: u32) -> Result<bool, KeyError> {
+        self.counters.operation(1);
         self.check_key(key)?;
-        if !self.root.contains(key) {
+        if !dispatch!(self, contains, key) {
             return Ok(false);
         }
-        self.root.remove(key);
+        dispatch!(self, remove, key);
         self.len -= 1;
         Ok(true)
     }
 
     pub fn contains(&self, key: u32) -> Result<bool, KeyError> {
+        self.counters.operation(2);
         self.check_key(key)?;
-        Ok(self.root.contains(key))
+        Ok(dispatch!(self, contains, key))
     }
 
     /// Largest stored key strictly less than `key`.
     pub fn predecessor(&self, key: u32) -> Result<Option<u32>, KeyError> {
+        self.counters.operation(3);
         self.check_key(key)?;
-        Ok(self.root.predecessor(key))
+        Ok(dispatch!(self, predecessor, key))
     }
 
     /// Smallest stored key strictly greater than `key`.
     pub fn successor(&self, key: u32) -> Result<Option<u32>, KeyError> {
+        self.counters.operation(4);
         self.check_key(key)?;
-        Ok(self.root.successor(key))
+        Ok(dispatch!(self, successor, key))
+    }
+
+    pub fn metrics(&self) -> Metrics {
+        self.counters.values.get()
+    }
+    pub fn reset_metrics(&self) {
+        self.counters.values.set(Metrics::default());
+    }
+    /// Disables recording without clearing existing counters.
+    pub fn set_metrics_enabled(&mut self, enabled: bool) {
+        self.counters.enabled = enabled;
+    }
+    /// Traverses owned storage without changing operation counters.
+    pub fn storage(&self) -> Storage {
+        let mut storage = Storage {
+            owned_bytes: size_of::<Self>(),
+            ..Storage::default()
+        };
+        self.root.storage(&mut storage);
+        storage
     }
 
     fn check_key(&self, key: u32) -> Result<(), KeyError> {
@@ -174,18 +214,21 @@ impl Node {
         ((high as u32) << self.lower_bits) | low
     }
 
-    fn contains(&self, key: u32) -> bool {
+    fn contains<const COUNT: bool>(&self, key: u32, probe: Probe<'_, COUNT>) -> bool {
+        probe.visit();
         if self.min == Some(key) || self.max == Some(key) {
             return true;
         }
         if self.min.is_none() || self.universe == 2 {
             return false;
         }
-        self.clusters[self.high(key)].contains(self.low(key))
+        self.cluster(self.high(key), probe)
+            .contains(self.low(key), probe.child())
     }
 
     // Precondition: key is absent and within the local universe.
-    fn insert(&mut self, mut key: u32) {
+    fn insert<const COUNT: bool>(&mut self, mut key: u32, probe: Probe<'_, COUNT>) {
+        probe.visit();
         let Some(min) = self.min else {
             self.min = Some(key);
             self.max = Some(key);
@@ -197,16 +240,17 @@ impl Node {
         if self.universe > 2 {
             let high = self.high(key);
             let low = self.low(key);
-            if self.clusters[high].min.is_none() {
-                self.summary.as_mut().unwrap().insert(high as u32);
+            if self.cluster(high, probe).min.is_none() {
+                self.summary_mut(probe).insert(high as u32, probe.child());
             }
-            self.clusters[high].insert(low);
+            self.cluster_mut(high, probe).insert(low, probe.child());
         }
         self.max = Some(self.max.unwrap().max(key));
     }
 
     // Precondition: key exists. The public wrapper checks this explicitly.
-    fn remove(&mut self, mut key: u32) {
+    fn remove<const COUNT: bool>(&mut self, mut key: u32, probe: Probe<'_, COUNT>) {
+        probe.visit();
         if self.min == self.max {
             self.min = None;
             self.max = None;
@@ -219,27 +263,29 @@ impl Node {
             return;
         }
         if self.min == Some(key) {
-            let first = self.summary.as_ref().unwrap().min.unwrap() as usize;
-            key = self.index(first, self.clusters[first].min.unwrap());
+            let first = self.summary(probe).min.unwrap() as usize;
+            key = self.index(first, self.cluster(first, probe).min.unwrap());
             self.min = Some(key);
         }
         let high = self.high(key);
         let low = self.low(key);
-        self.clusters[high].remove(low);
-        if self.clusters[high].min.is_none() {
-            self.summary.as_mut().unwrap().remove(high as u32);
+        self.cluster_mut(high, probe).remove(low, probe.child());
+        if self.cluster(high, probe).min.is_none() {
+            self.summary_mut(probe).remove(high as u32, probe.child());
         }
         if self.max == Some(key) {
-            self.max = match self.summary.as_ref().unwrap().max {
+            self.max = match self.summary(probe).max {
                 None => self.min,
-                Some(last) => {
-                    Some(self.index(last as usize, self.clusters[last as usize].max.unwrap()))
-                }
+                Some(last) => Some(self.index(
+                    last as usize,
+                    self.cluster(last as usize, probe).max.unwrap(),
+                )),
             };
         }
     }
 
-    fn successor(&self, key: u32) -> Option<u32> {
+    fn successor<const COUNT: bool>(&self, key: u32, probe: Probe<'_, COUNT>) -> Option<u32> {
+        probe.visit();
         let min = self.min?;
         if key < min {
             return Some(min);
@@ -252,16 +298,20 @@ impl Node {
         }
         let high = self.high(key);
         let low = self.low(key);
-        if self.clusters[high].max.is_some_and(|max| low < max) {
-            let next = self.clusters[high].successor(low).unwrap();
+        if self.cluster(high, probe).max.is_some_and(|max| low < max) {
+            let next = self
+                .cluster(high, probe)
+                .successor(low, probe.child())
+                .unwrap();
             Some(self.index(high, next))
         } else {
-            let next = self.summary.as_ref().unwrap().successor(high as u32)? as usize;
-            Some(self.index(next, self.clusters[next].min.unwrap()))
+            let next = self.summary(probe).successor(high as u32, probe.child())? as usize;
+            Some(self.index(next, self.cluster(next, probe).min.unwrap()))
         }
     }
 
-    fn predecessor(&self, key: u32) -> Option<u32> {
+    fn predecessor<const COUNT: bool>(&self, key: u32, probe: Probe<'_, COUNT>) -> Option<u32> {
+        probe.visit();
         let max = self.max?;
         if key > max {
             return Some(max);
@@ -274,16 +324,53 @@ impl Node {
         }
         let high = self.high(key);
         let low = self.low(key);
-        if self.clusters[high].min.is_some_and(|min| low > min) {
-            let previous = self.clusters[high].predecessor(low).unwrap();
+        if self.cluster(high, probe).min.is_some_and(|min| low > min) {
+            let previous = self
+                .cluster(high, probe)
+                .predecessor(low, probe.child())
+                .unwrap();
             Some(self.index(high, previous))
         } else {
-            match self.summary.as_ref().unwrap().predecessor(high as u32) {
+            match self.summary(probe).predecessor(high as u32, probe.child()) {
                 Some(previous) => Some(self.index(
                     previous as usize,
-                    self.clusters[previous as usize].max.unwrap(),
+                    self.cluster(previous as usize, probe).max.unwrap(),
                 )),
                 None => self.min,
+            }
+        }
+    }
+
+    fn cluster<const COUNT: bool>(&self, index: usize, probe: Probe<'_, COUNT>) -> &Self {
+        probe.cluster();
+        &self.clusters[index]
+    }
+    fn cluster_mut<const COUNT: bool>(
+        &mut self,
+        index: usize,
+        probe: Probe<'_, COUNT>,
+    ) -> &mut Self {
+        probe.cluster();
+        &mut self.clusters[index]
+    }
+    fn summary<const COUNT: bool>(&self, probe: Probe<'_, COUNT>) -> &Self {
+        probe.summary();
+        self.summary.as_ref().unwrap()
+    }
+    fn summary_mut<const COUNT: bool>(&mut self, probe: Probe<'_, COUNT>) -> &mut Self {
+        probe.summary();
+        self.summary.as_mut().unwrap()
+    }
+
+    fn storage(&self, storage: &mut Storage) {
+        storage.allocated_nodes += 1;
+        storage.nonempty_nodes += usize::from(self.min.is_some());
+        if let Some(summary) = &self.summary {
+            storage.heap_allocations += 2; // Box<Node> and nonempty Box<[Node]>.
+            storage.owned_bytes += size_of::<Self>() + self.clusters.len() * size_of::<Self>();
+            summary.storage(storage);
+            for cluster in &self.clusters {
+                cluster.storage(storage);
             }
         }
     }
@@ -332,7 +419,9 @@ impl Node {
             count += cluster
                 .validate()
                 .map_err(|error| format!("cluster[{i}]/{error}"))?;
-            if summary.contains(i as u32) != cluster.min.is_some() {
+            if summary.contains(i as u32, Probe::<false>::new(&Counters::default()))
+                != cluster.min.is_some()
+            {
                 return Err(fail("summary membership differs from cluster occupancy"));
             }
             if let Some(min) = cluster.min {
