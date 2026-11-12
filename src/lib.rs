@@ -6,9 +6,11 @@
 
 pub mod benchmark;
 mod metrics;
+mod svg;
 mod veb;
 pub mod workload;
 
 pub use metrics::{Metrics, OPERATION_NAMES, Storage};
+pub use svg::{Query, SvgOptions};
 
 pub use veb::{KeyError, UniverseError, VebSet};

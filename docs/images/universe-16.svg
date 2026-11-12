@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3852" height="718" viewBox="0 0 3852 718" role="img" aria-labelledby="title description">
+<title id="title">van Emde Boas tree, universe 16</title>
+<desc id="description">Recursive cluster hierarchy. Summary nodes store cluster indices. Highlighted nodes show query accesses; collapsed nodes may hide accesses.</desc>
+<rect width="100%" height="100%" fill="#fbfcfe"/>
+<g font-family="Segoe UI,Arial,sans-serif">
+<text x="32" y="40" font-size="12" fill="#426782">INTEGER SETS / RECURSIVE DECOMPOSITION</text>
+<text x="32" y="79" font-size="30" fill="#163c55">van Emde Boas / universe 16</text>
+<text x="32" y="108" font-size="14" fill="#526575">5 keys  |  21 allocated nodes  |  1120 owned bytes  |  21 cards shown</text>
+<text x="32" y="138" font-size="13" fill="#92602d">Successor(7) = 9  |  orange: accessed nodes (including extrema reads)</text>
+<text x="32" y="161" font-size="11" fill="#526575">Summary domains are independent of root keys. Collapsed branches may contain highlighted accesses.</text>
+<path d="M1926,314 C1926,342 402,342 402,370" fill="none" stroke="#db7d23" stroke-width="2" stroke-dasharray="6 5"/>
+<path d="M402,492 C402,520 148,520 148,548" fill="none" stroke="#db7d23" stroke-width="2" stroke-dasharray="6 5"/>
+<path d="M402,492 C402,520 402,520 402,548" fill="none" stroke="#db7d23" stroke-width="2"/>
+<path d="M402,492 C402,520 656,520 656,548" fill="none" stroke="#db7d23" stroke-width="2"/>
+<path d="M1926,314 C1926,342 1164,342 1164,370" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M1164,492 C1164,520 910,520 910,548" fill="none" stroke="#9a79c8" stroke-width="2" stroke-dasharray="6 5"/>
+<path d="M1164,492 C1164,520 1164,520 1164,548" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M1164,492 C1164,520 1418,520 1418,548" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M1926,314 C1926,342 1926,342 1926,370" fill="none" stroke="#db7d23" stroke-width="2"/>
+<path d="M1926,492 C1926,520 1672,520 1672,548" fill="none" stroke="#9a79c8" stroke-width="2" stroke-dasharray="6 5"/>
+<path d="M1926,492 C1926,520 1926,520 1926,548" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M1926,492 C1926,520 2180,520 2180,548" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M1926,314 C1926,342 2688,342 2688,370" fill="none" stroke="#db7d23" stroke-width="2"/>
+<path d="M2688,492 C2688,520 2434,520 2434,548" fill="none" stroke="#9a79c8" stroke-width="2" stroke-dasharray="6 5"/>
+<path d="M2688,492 C2688,520 2688,520 2688,548" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M2688,492 C2688,520 2942,520 2942,548" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M1926,314 C1926,342 3450,342 3450,370" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M3450,492 C3450,520 3196,520 3196,548" fill="none" stroke="#9a79c8" stroke-width="2" stroke-dasharray="6 5"/>
+<path d="M3450,492 C3450,520 3450,520 3450,548" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M3450,492 C3450,520 3704,520 3704,548" fill="none" stroke="#79a49b" stroke-width="2"/>
+<g id="r"><title>ROOT: local universe 16, min Some(2), max Some(14)</title><rect x="1810" y="192" width="232" height="122" rx="10" fill="#eaf3fb" stroke="#db7d23" stroke-width="3"/>
+<text x="1824" y="215" font-size="12" fill="#31546a">ROOT  /  U=16</text>
+<text x="1824" y="236" font-size="11" fill="#526575">root keys [0..16)</text>
+<text x="1824" y="258" font-size="13" fill="#19364a">local min 2   max 14</text>
+<text x="1824" y="277" font-size="11" fill="#526575">root min 2   max 14</text>
+<text x="1824" y="295" font-size="10" fill="#526575">minimum stored outside clusters</text>
+</g>
+<g id="r-s"><title>SUMMARY: local universe 4, min Some(0), max Some(3)</title><rect x="286" y="370" width="232" height="122" rx="10" fill="#f5efff" stroke="#db7d23" stroke-width="3"/>
+<text x="300" y="393" font-size="12" fill="#31546a">SUMMARY  /  U=4</text>
+<text x="300" y="414" font-size="11" fill="#526575">summary IDs [0..4)</text>
+<text x="300" y="436" font-size="13" fill="#19364a">local min 0   max 3</text>
+<text x="300" y="455" font-size="11" fill="#526575">summary keys are cluster indices</text>
+<text x="300" y="473" font-size="10" fill="#526575">minimum stored outside clusters</text>
+</g>
+<g id="r-s-s"><title>SUMMARY: local universe 2, min Some(0), max Some(1)</title><rect x="32" y="548" width="232" height="122" rx="10" fill="#f5efff" stroke="#db7d23" stroke-width="3"/>
+<text x="46" y="571" font-size="12" fill="#31546a">SUMMARY  /  U=2</text>
+<text x="46" y="592" font-size="11" fill="#526575">summary IDs [0..2)</text>
+<text x="46" y="614" font-size="13" fill="#19364a">local min 0   max 1</text>
+<text x="46" y="633" font-size="11" fill="#526575">summary keys are cluster indices</text>
+<text x="46" y="651" font-size="10" fill="#526575">base case</text>
+</g>
+<g id="r-s-c0"><title>CLUSTER 0: local universe 2, min Some(1), max Some(1)</title><rect x="286" y="548" width="232" height="122" rx="10" fill="#f5efff" stroke="#db7d23" stroke-width="3"/>
+<text x="300" y="571" font-size="12" fill="#31546a">CLUSTER 0  /  U=2</text>
+<text x="300" y="592" font-size="11" fill="#526575">summary IDs [0..2)</text>
+<text x="300" y="614" font-size="13" fill="#19364a">local min 1   max 1</text>
+<text x="300" y="633" font-size="11" fill="#526575">summary keys are cluster indices</text>
+<text x="300" y="651" font-size="10" fill="#526575">base case</text>
+</g>
+<g id="r-s-c1"><title>CLUSTER 1: local universe 2, min Some(0), max Some(1)</title><rect x="540" y="548" width="232" height="122" rx="10" fill="#f5efff" stroke="#db7d23" stroke-width="3"/>
+<text x="554" y="571" font-size="12" fill="#31546a">CLUSTER 1  /  U=2</text>
+<text x="554" y="592" font-size="11" fill="#526575">summary IDs [2..4)</text>
+<text x="554" y="614" font-size="13" fill="#19364a">local min 0   max 1</text>
+<text x="554" y="633" font-size="11" fill="#526575">summary keys are cluster indices</text>
+<text x="554" y="651" font-size="10" fill="#526575">base case</text>
+</g>
+<g id="r-c0"><title>CLUSTER 0: local universe 4, min Some(3), max Some(3)</title><rect x="1048" y="370" width="232" height="122" rx="10" fill="#eff8f4" stroke="#8db9a8" stroke-width="1"/>
+<text x="1062" y="393" font-size="12" fill="#31546a">CLUSTER 0  /  U=4</text>
+<text x="1062" y="414" font-size="11" fill="#526575">root keys [0..4)</text>
+<text x="1062" y="436" font-size="13" fill="#19364a">local min 3   max 3</text>
+<text x="1062" y="455" font-size="11" fill="#526575">root min 3   max 3</text>
+<text x="1062" y="473" font-size="10" fill="#526575">minimum stored outside clusters</text>
+</g>
+<g id="r-c0-s"><title>SUMMARY: local universe 2, min None, max None</title><rect x="794" y="548" width="232" height="122" rx="10" fill="#f5efff" stroke="#b197d4" stroke-width="1"/>
+<text x="808" y="571" font-size="12" fill="#31546a">SUMMARY  /  U=2</text>
+<text x="808" y="592" font-size="11" fill="#526575">summary IDs [0..2)</text>
+<text x="808" y="614" font-size="13" fill="#19364a">local min -   max -</text>
+<text x="808" y="633" font-size="11" fill="#526575">summary keys are cluster indices</text>
+<text x="808" y="651" font-size="10" fill="#526575">base case</text>
+</g>
+<g id="r-c0-c0"><title>CLUSTER 0: local universe 2, min None, max None</title><rect x="1048" y="548" width="232" height="122" rx="10" fill="#f1f4f6" stroke="#c7d0d6" stroke-width="1"/>
+<text x="1062" y="571" font-size="12" fill="#31546a">CLUSTER 0  /  U=2</text>
+<text x="1062" y="592" font-size="11" fill="#526575">root keys [0..2)</text>
+<text x="1062" y="614" font-size="13" fill="#19364a">local min -   max -</text>
+<text x="1062" y="633" font-size="11" fill="#526575">root min -   max -</text>
+<text x="1062" y="651" font-size="10" fill="#526575">base case</text>
+</g>
+<g id="r-c0-c1"><title>CLUSTER 1: local universe 2, min None, max None</title><rect x="1302" y="548" width="232" height="122" rx="10" fill="#f1f4f6" stroke="#c7d0d6" stroke-width="1"/>
+<text x="1316" y="571" font-size="12" fill="#31546a">CLUSTER 1  /  U=2</text>
+<text x="1316" y="592" font-size="11" fill="#526575">root keys [2..4)</text>
+<text x="1316" y="614" font-size="13" fill="#19364a">local min -   max -</text>
+<text x="1316" y="633" font-size="11" fill="#526575">root min -   max -</text>
+<text x="1316" y="651" font-size="10" fill="#526575">base case</text>
+</g>
+<g id="r-c1"><title>CLUSTER 1: local universe 4, min Some(3), max Some(3)</title><rect x="1810" y="370" width="232" height="122" rx="10" fill="#eff8f4" stroke="#db7d23" stroke-width="3"/>
+<text x="1824" y="393" font-size="12" fill="#31546a">CLUSTER 1  /  U=4</text>
+<text x="1824" y="414" font-size="11" fill="#526575">root keys [4..8)</text>
+<text x="1824" y="436" font-size="13" fill="#19364a">local min 3   max 3</text>
+<text x="1824" y="455" font-size="11" fill="#526575">root min 7   max 7</text>
+<text x="1824" y="473" font-size="10" fill="#526575">minimum stored outside clusters</text>
+</g>
+<g id="r-c1-s"><title>SUMMARY: local universe 2, min None, max None</title><rect x="1556" y="548" width="232" height="122" rx="10" fill="#f5efff" stroke="#b197d4" stroke-width="1"/>
+<text x="1570" y="571" font-size="12" fill="#31546a">SUMMARY  /  U=2</text>
+<text x="1570" y="592" font-size="11" fill="#526575">summary IDs [0..2)</text>
+<text x="1570" y="614" font-size="13" fill="#19364a">local min -   max -</text>
+<text x="1570" y="633" font-size="11" fill="#526575">summary keys are cluster indices</text>
+<text x="1570" y="651" font-size="10" fill="#526575">base case</text>
+</g>
+<g id="r-c1-c0"><title>CLUSTER 0: local universe 2, min None, max None</title><rect x="1810" y="548" width="232" height="122" rx="10" fill="#f1f4f6" stroke="#c7d0d6" stroke-width="1"/>
+<text x="1824" y="571" font-size="12" fill="#31546a">CLUSTER 0  /  U=2</text>
+<text x="1824" y="592" font-size="11" fill="#526575">root keys [4..6)</text>
+<text x="1824" y="614" font-size="13" fill="#19364a">local min -   max -</text>
+<text x="1824" y="633" font-size="11" fill="#526575">root min -   max -</text>
+<text x="1824" y="651" font-size="10" fill="#526575">base case</text>
+</g>
+<g id="r-c1-c1"><title>CLUSTER 1: local universe 2, min None, max None</title><rect x="2064" y="548" width="232" height="122" rx="10" fill="#f1f4f6" stroke="#c7d0d6" stroke-width="1"/>
+<text x="2078" y="571" font-size="12" fill="#31546a">CLUSTER 1  /  U=2</text>
+<text x="2078" y="592" font-size="11" fill="#526575">root keys [6..8)</text>
+<text x="2078" y="614" font-size="13" fill="#19364a">local min -   max -</text>
+<text x="2078" y="633" font-size="11" fill="#526575">root min -   max -</text>
+<text x="2078" y="651" font-size="10" fill="#526575">base case</text>
+</g>
+<g id="r-c2"><title>CLUSTER 2: local universe 4, min Some(1), max Some(1)</title><rect x="2572" y="370" width="232" height="122" rx="10" fill="#eff8f4" stroke="#db7d23" stroke-width="3"/>
+<text x="2586" y="393" font-size="12" fill="#31546a">CLUSTER 2  /  U=4</text>
+<text x="2586" y="414" font-size="11" fill="#526575">root keys [8..12)</text>
+<text x="2586" y="436" font-size="13" fill="#19364a">local min 1   max 1</text>
+<text x="2586" y="455" font-size="11" fill="#526575">root min 9   max 9</text>
+<text x="2586" y="473" font-size="10" fill="#526575">minimum stored outside clusters</text>
+</g>
+<g id="r-c2-s"><title>SUMMARY: local universe 2, min None, max None</title><rect x="2318" y="548" width="232" height="122" rx="10" fill="#f5efff" stroke="#b197d4" stroke-width="1"/>
+<text x="2332" y="571" font-size="12" fill="#31546a">SUMMARY  /  U=2</text>
+<text x="2332" y="592" font-size="11" fill="#526575">summary IDs [0..2)</text>
+<text x="2332" y="614" font-size="13" fill="#19364a">local min -   max -</text>
+<text x="2332" y="633" font-size="11" fill="#526575">summary keys are cluster indices</text>
+<text x="2332" y="651" font-size="10" fill="#526575">base case</text>
+</g>
+<g id="r-c2-c0"><title>CLUSTER 0: local universe 2, min None, max None</title><rect x="2572" y="548" width="232" height="122" rx="10" fill="#f1f4f6" stroke="#c7d0d6" stroke-width="1"/>
+<text x="2586" y="571" font-size="12" fill="#31546a">CLUSTER 0  /  U=2</text>
+<text x="2586" y="592" font-size="11" fill="#526575">root keys [8..10)</text>
+<text x="2586" y="614" font-size="13" fill="#19364a">local min -   max -</text>
+<text x="2586" y="633" font-size="11" fill="#526575">root min -   max -</text>
+<text x="2586" y="651" font-size="10" fill="#526575">base case</text>
+</g>
+<g id="r-c2-c1"><title>CLUSTER 1: local universe 2, min None, max None</title><rect x="2826" y="548" width="232" height="122" rx="10" fill="#f1f4f6" stroke="#c7d0d6" stroke-width="1"/>
+<text x="2840" y="571" font-size="12" fill="#31546a">CLUSTER 1  /  U=2</text>
+<text x="2840" y="592" font-size="11" fill="#526575">root keys [10..12)</text>
+<text x="2840" y="614" font-size="13" fill="#19364a">local min -   max -</text>
+<text x="2840" y="633" font-size="11" fill="#526575">root min -   max -</text>
+<text x="2840" y="651" font-size="10" fill="#526575">base case</text>
+</g>
+<g id="r-c3"><title>CLUSTER 3: local universe 4, min Some(2), max Some(2)</title><rect x="3334" y="370" width="232" height="122" rx="10" fill="#eff8f4" stroke="#8db9a8" stroke-width="1"/>
+<text x="3348" y="393" font-size="12" fill="#31546a">CLUSTER 3  /  U=4</text>
+<text x="3348" y="414" font-size="11" fill="#526575">root keys [12..16)</text>
+<text x="3348" y="436" font-size="13" fill="#19364a">local min 2   max 2</text>
+<text x="3348" y="455" font-size="11" fill="#526575">root min 14   max 14</text>
+<text x="3348" y="473" font-size="10" fill="#526575">minimum stored outside clusters</text>
+</g>
+<g id="r-c3-s"><title>SUMMARY: local universe 2, min None, max None</title><rect x="3080" y="548" width="232" height="122" rx="10" fill="#f5efff" stroke="#b197d4" stroke-width="1"/>
+<text x="3094" y="571" font-size="12" fill="#31546a">SUMMARY  /  U=2</text>
+<text x="3094" y="592" font-size="11" fill="#526575">summary IDs [0..2)</text>
+<text x="3094" y="614" font-size="13" fill="#19364a">local min -   max -</text>
+<text x="3094" y="633" font-size="11" fill="#526575">summary keys are cluster indices</text>
+<text x="3094" y="651" font-size="10" fill="#526575">base case</text>
+</g>
+<g id="r-c3-c0"><title>CLUSTER 0: local universe 2, min None, max None</title><rect x="3334" y="548" width="232" height="122" rx="10" fill="#f1f4f6" stroke="#c7d0d6" stroke-width="1"/>
+<text x="3348" y="571" font-size="12" fill="#31546a">CLUSTER 0  /  U=2</text>
+<text x="3348" y="592" font-size="11" fill="#526575">root keys [12..14)</text>
+<text x="3348" y="614" font-size="13" fill="#19364a">local min -   max -</text>
+<text x="3348" y="633" font-size="11" fill="#526575">root min -   max -</text>
+<text x="3348" y="651" font-size="10" fill="#526575">base case</text>
+</g>
+<g id="r-c3-c1"><title>CLUSTER 1: local universe 2, min None, max None</title><rect x="3588" y="548" width="232" height="122" rx="10" fill="#f1f4f6" stroke="#c7d0d6" stroke-width="1"/>
+<text x="3602" y="571" font-size="12" fill="#31546a">CLUSTER 1  /  U=2</text>
+<text x="3602" y="592" font-size="11" fill="#526575">root keys [14..16)</text>
+<text x="3602" y="614" font-size="13" fill="#19364a">local min -   max -</text>
+<text x="3602" y="633" font-size="11" fill="#526575">root min -   max -</text>
+<text x="3602" y="651" font-size="10" fill="#526575">base case</text>
+</g>
+</g>
+</svg>

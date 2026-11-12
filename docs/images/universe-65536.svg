@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3090" height="718" viewBox="0 0 3090 718" role="img" aria-labelledby="title description">
+<title id="title">van Emde Boas tree, universe 65536</title>
+<desc id="description">Recursive cluster hierarchy. Summary nodes store cluster indices. Highlighted nodes show query accesses; collapsed nodes may hide accesses.</desc>
+<rect width="100%" height="100%" fill="#fbfcfe"/>
+<g font-family="Segoe UI,Arial,sans-serif">
+<text x="32" y="40" font-size="12" fill="#426782">INTEGER SETS / RECURSIVE DECOMPOSITION</text>
+<text x="32" y="79" font-size="30" fill="#163c55">van Emde Boas / universe 65536</text>
+<text x="32" y="108" font-size="14" fill="#526575">9 keys  |  92007 allocated nodes  |  4416448 owned bytes  |  16 cards shown</text>
+<text x="32" y="138" font-size="13" fill="#92602d">Successor(257) = 4095  |  orange: accessed nodes (including extrema reads)</text>
+<text x="32" y="161" font-size="11" fill="#526575">Summary domains are independent of root keys. Collapsed branches may contain highlighted accesses.</text>
+<path d="M1545,314 C1545,342 529,342 529,370" fill="none" stroke="#db7d23" stroke-width="2" stroke-dasharray="6 5"/>
+<path d="M529,492 C529,520 148,520 148,548" fill="none" stroke="#9a79c8" stroke-width="2" stroke-dasharray="6 5"/>
+<path d="M529,492 C529,520 402,520 402,548" fill="none" stroke="#db7d23" stroke-width="2"/>
+<path d="M529,492 C529,520 656,520 656,548" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M529,492 C529,520 910,520 910,548" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M1545,314 C1545,342 1418,342 1418,370" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M1418,492 C1418,520 1164,520 1164,548" fill="none" stroke="#9a79c8" stroke-width="2" stroke-dasharray="6 5"/>
+<path d="M1418,492 C1418,520 1418,520 1418,548" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M1418,492 C1418,520 1672,520 1672,548" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M1545,314 C1545,342 2053,342 2053,370" fill="none" stroke="#db7d23" stroke-width="2"/>
+<path d="M2053,492 C2053,520 1926,520 1926,548" fill="none" stroke="#9a79c8" stroke-width="2" stroke-dasharray="6 5"/>
+<path d="M2053,492 C2053,520 2180,520 2180,548" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M1545,314 C1545,342 2434,342 2434,370" fill="none" stroke="#db7d23" stroke-width="2"/>
+<path d="M1545,314 C1545,342 2688,342 2688,370" fill="none" stroke="#79a49b" stroke-width="2"/>
+<path d="M1545,314 C1545,342 2942,342 2942,370" fill="none" stroke="#79a49b" stroke-width="2"/>
+<g id="r"><title>ROOT: local universe 65536, min Some(2), max Some(65535)</title><rect x="1429" y="192" width="232" height="122" rx="10" fill="#eaf3fb" stroke="#db7d23" stroke-width="3"/>
+<text x="1443" y="215" font-size="12" fill="#31546a">ROOT  /  U=65536</text>
+<text x="1443" y="236" font-size="11" fill="#526575">root keys [0..65536)</text>
+<text x="1443" y="258" font-size="13" fill="#19364a">local min 2   max 65535</text>
+<text x="1443" y="277" font-size="11" fill="#526575">root min 2   max 65535</text>
+<text x="1443" y="295" font-size="10" fill="#526575">251 empty branches hidden</text>
+</g>
+<g id="r-s"><title>SUMMARY: local universe 256, min Some(0), max Some(255)</title><rect x="413" y="370" width="232" height="122" rx="10" fill="#f5efff" stroke="#db7d23" stroke-width="3"/>
+<text x="427" y="393" font-size="12" fill="#31546a">SUMMARY  /  U=256</text>
+<text x="427" y="414" font-size="11" fill="#526575">summary IDs [0..256)</text>
+<text x="427" y="436" font-size="13" fill="#19364a">local min 0   max 255</text>
+<text x="427" y="455" font-size="11" fill="#526575">summary keys are cluster indices</text>
+<text x="427" y="473" font-size="10" fill="#526575">13 empty branches hidden</text>
+</g>
+<g id="r-s-s"><title>SUMMARY: local universe 16, min Some(0), max Some(15)</title><rect x="32" y="548" width="232" height="122" rx="10" fill="#f5efff" stroke="#b197d4" stroke-width="1"/>
+<text x="46" y="571" font-size="12" fill="#31546a">SUMMARY  /  U=16</text>
+<text x="46" y="592" font-size="11" fill="#526575">summary IDs [0..16)</text>
+<text x="46" y="614" font-size="13" fill="#19364a">local min 0   max 15</text>
+<text x="46" y="633" font-size="11" fill="#526575">summary keys are cluster indices</text>
+<text x="46" y="651" font-size="10" fill="#526575">2 empty branches hidden</text>
+<text x="46" y="664" font-size="10" fill="#526575">3/3 branches collapsed</text>
+</g>
+<g id="r-s-c0"><title>CLUSTER 0: local universe 16, min Some(1), max Some(15)</title><rect x="286" y="548" width="232" height="122" rx="10" fill="#f5efff" stroke="#db7d23" stroke-width="3"/>
+<text x="300" y="571" font-size="12" fill="#31546a">CLUSTER 0  /  U=16</text>
+<text x="300" y="592" font-size="11" fill="#526575">summary IDs [0..16)</text>
+<text x="300" y="614" font-size="13" fill="#19364a">local min 1   max 15</text>
+<text x="300" y="633" font-size="11" fill="#526575">summary keys are cluster indices</text>
+<text x="300" y="651" font-size="10" fill="#526575">3 empty branches hidden</text>
+<text x="300" y="664" font-size="10" fill="#526575">2/2 branches collapsed</text>
+</g>
+<g id="r-s-c1"><title>CLUSTER 1: local universe 16, min Some(0), max Some(0)</title><rect x="540" y="548" width="232" height="122" rx="10" fill="#f5efff" stroke="#b197d4" stroke-width="1"/>
+<text x="554" y="571" font-size="12" fill="#31546a">CLUSTER 1  /  U=16</text>
+<text x="554" y="592" font-size="11" fill="#526575">summary IDs [16..32)</text>
+<text x="554" y="614" font-size="13" fill="#19364a">local min 0   max 0</text>
+<text x="554" y="633" font-size="11" fill="#526575">summary keys are cluster indices</text>
+<text x="554" y="651" font-size="10" fill="#526575">5 empty branches hidden</text>
+</g>
+<g id="r-s-c15"><title>CLUSTER 15: local universe 16, min Some(15), max Some(15)</title><rect x="794" y="548" width="232" height="122" rx="10" fill="#f5efff" stroke="#b197d4" stroke-width="1"/>
+<text x="808" y="571" font-size="12" fill="#31546a">CLUSTER 15  /  U=16</text>
+<text x="808" y="592" font-size="11" fill="#526575">summary IDs [240..256)</text>
+<text x="808" y="614" font-size="13" fill="#19364a">local min 15   max 15</text>
+<text x="808" y="633" font-size="11" fill="#526575">summary keys are cluster indices</text>
+<text x="808" y="651" font-size="10" fill="#526575">5 empty branches hidden</text>
+</g>
+<g id="r-c0"><title>CLUSTER 0: local universe 256, min Some(3), max Some(255)</title><rect x="1302" y="370" width="232" height="122" rx="10" fill="#eff8f4" stroke="#8db9a8" stroke-width="1"/>
+<text x="1316" y="393" font-size="12" fill="#31546a">CLUSTER 0  /  U=256</text>
+<text x="1316" y="414" font-size="11" fill="#526575">root keys [0..256)</text>
+<text x="1316" y="436" font-size="13" fill="#19364a">local min 3   max 255</text>
+<text x="1316" y="455" font-size="11" fill="#526575">root min 3   max 255</text>
+<text x="1316" y="473" font-size="10" fill="#526575">14 empty branches hidden</text>
+</g>
+<g id="r-c0-s"><title>SUMMARY: local universe 16, min Some(0), max Some(15)</title><rect x="1048" y="548" width="232" height="122" rx="10" fill="#f5efff" stroke="#b197d4" stroke-width="1"/>
+<text x="1062" y="571" font-size="12" fill="#31546a">SUMMARY  /  U=16</text>
+<text x="1062" y="592" font-size="11" fill="#526575">summary IDs [0..16)</text>
+<text x="1062" y="614" font-size="13" fill="#19364a">local min 0   max 15</text>
+<text x="1062" y="633" font-size="11" fill="#526575">summary keys are cluster indices</text>
+<text x="1062" y="651" font-size="10" fill="#526575">3 empty branches hidden</text>
+<text x="1062" y="664" font-size="10" fill="#526575">2/2 branches collapsed</text>
+</g>
+<g id="r-c0-c0"><title>CLUSTER 0: local universe 16, min Some(7), max Some(7)</title><rect x="1302" y="548" width="232" height="122" rx="10" fill="#eff8f4" stroke="#8db9a8" stroke-width="1"/>
+<text x="1316" y="571" font-size="12" fill="#31546a">CLUSTER 0  /  U=16</text>
+<text x="1316" y="592" font-size="11" fill="#526575">root keys [0..16)</text>
+<text x="1316" y="614" font-size="13" fill="#19364a">local min 7   max 7</text>
+<text x="1316" y="633" font-size="11" fill="#526575">root min 7   max 7</text>
+<text x="1316" y="651" font-size="10" fill="#526575">5 empty branches hidden</text>
+</g>
+<g id="r-c0-c15"><title>CLUSTER 15: local universe 16, min Some(15), max Some(15)</title><rect x="1556" y="548" width="232" height="122" rx="10" fill="#eff8f4" stroke="#8db9a8" stroke-width="1"/>
+<text x="1570" y="571" font-size="12" fill="#31546a">CLUSTER 15  /  U=16</text>
+<text x="1570" y="592" font-size="11" fill="#526575">root keys [240..256)</text>
+<text x="1570" y="614" font-size="13" fill="#19364a">local min 15   max 15</text>
+<text x="1570" y="633" font-size="11" fill="#526575">root min 255   max 255</text>
+<text x="1570" y="651" font-size="10" fill="#526575">5 empty branches hidden</text>
+</g>
+<g id="r-c1"><title>CLUSTER 1: local universe 256, min Some(0), max Some(1)</title><rect x="1937" y="370" width="232" height="122" rx="10" fill="#eff8f4" stroke="#db7d23" stroke-width="3"/>
+<text x="1951" y="393" font-size="12" fill="#31546a">CLUSTER 1  /  U=256</text>
+<text x="1951" y="414" font-size="11" fill="#526575">root keys [256..512)</text>
+<text x="1951" y="436" font-size="13" fill="#19364a">local min 0   max 1</text>
+<text x="1951" y="455" font-size="11" fill="#526575">root min 256   max 257</text>
+<text x="1951" y="473" font-size="10" fill="#526575">15 empty branches hidden</text>
+</g>
+<g id="r-c1-s"><title>SUMMARY: local universe 16, min Some(0), max Some(0)</title><rect x="1810" y="548" width="232" height="122" rx="10" fill="#f5efff" stroke="#b197d4" stroke-width="1"/>
+<text x="1824" y="571" font-size="12" fill="#31546a">SUMMARY  /  U=16</text>
+<text x="1824" y="592" font-size="11" fill="#526575">summary IDs [0..16)</text>
+<text x="1824" y="614" font-size="13" fill="#19364a">local min 0   max 0</text>
+<text x="1824" y="633" font-size="11" fill="#526575">summary keys are cluster indices</text>
+<text x="1824" y="651" font-size="10" fill="#526575">5 empty branches hidden</text>
+</g>
+<g id="r-c1-c0"><title>CLUSTER 0: local universe 16, min Some(1), max Some(1)</title><rect x="2064" y="548" width="232" height="122" rx="10" fill="#eff8f4" stroke="#8db9a8" stroke-width="1"/>
+<text x="2078" y="571" font-size="12" fill="#31546a">CLUSTER 0  /  U=16</text>
+<text x="2078" y="592" font-size="11" fill="#526575">root keys [256..272)</text>
+<text x="2078" y="614" font-size="13" fill="#19364a">local min 1   max 1</text>
+<text x="2078" y="633" font-size="11" fill="#526575">root min 257   max 257</text>
+<text x="2078" y="651" font-size="10" fill="#526575">5 empty branches hidden</text>
+</g>
+<g id="r-c15"><title>CLUSTER 15: local universe 256, min Some(255), max Some(255)</title><rect x="2318" y="370" width="232" height="122" rx="10" fill="#eff8f4" stroke="#db7d23" stroke-width="3"/>
+<text x="2332" y="393" font-size="12" fill="#31546a">CLUSTER 15  /  U=256</text>
+<text x="2332" y="414" font-size="11" fill="#526575">root keys [3840..4096)</text>
+<text x="2332" y="436" font-size="13" fill="#19364a">local min 255   max 255</text>
+<text x="2332" y="455" font-size="11" fill="#526575">root min 4095   max 4095</text>
+<text x="2332" y="473" font-size="10" fill="#526575">17 empty branches hidden</text>
+</g>
+<g id="r-c16"><title>CLUSTER 16: local universe 256, min Some(0), max Some(0)</title><rect x="2572" y="370" width="232" height="122" rx="10" fill="#eff8f4" stroke="#8db9a8" stroke-width="1"/>
+<text x="2586" y="393" font-size="12" fill="#31546a">CLUSTER 16  /  U=256</text>
+<text x="2586" y="414" font-size="11" fill="#526575">root keys [4096..4352)</text>
+<text x="2586" y="436" font-size="13" fill="#19364a">local min 0   max 0</text>
+<text x="2586" y="455" font-size="11" fill="#526575">root min 4096   max 4096</text>
+<text x="2586" y="473" font-size="10" fill="#526575">17 empty branches hidden</text>
+</g>
+<g id="r-c255"><title>CLUSTER 255: local universe 256, min Some(255), max Some(255)</title><rect x="2826" y="370" width="232" height="122" rx="10" fill="#eff8f4" stroke="#8db9a8" stroke-width="1"/>
+<text x="2840" y="393" font-size="12" fill="#31546a">CLUSTER 255  /  U=256</text>
+<text x="2840" y="414" font-size="11" fill="#526575">root keys [65280..65536)</text>
+<text x="2840" y="436" font-size="13" fill="#19364a">local min 255   max 255</text>
+<text x="2840" y="455" font-size="11" fill="#526575">root min 65535   max 65535</text>
+<text x="2840" y="473" font-size="10" fill="#526575">17 empty branches hidden</text>
+</g>
+</g>
+</svg>

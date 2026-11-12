@@ -1,5 +1,6 @@
 use std::{collections::BTreeMap, error::Error, fs, path::Path, process::ExitCode};
 use veb_successor::{
+    Query, SvgOptions, VebSet,
     benchmark::{self, Config, Workload},
     workload,
 };
@@ -11,6 +12,9 @@ Usage:
   veb bench  [--universe 16|256|65536|all] [--operations 10000] [--seed 42]
              [--occupancy 0..100|all] [--repeats 7] [--workload queries|mixed]
              [--output results.csv]
+  veb render [--universe 16|256|65536] [--keys 2,3,7,9,14]
+             [--depth 4] [--max-nodes 200] [--show-empty]
+             [--successor KEY | --predecessor KEY] [--output output/tree.svg]
 
 Defaults: universe=all, occupancy=all (1%, 50%, 90%), workload=queries.
 Use cargo run --release -- ... for timings. Bench emits CSV; empty BTreeSet
@@ -48,6 +52,16 @@ fn run() -> Result<(), Box<dyn Error>> {
             "--workload",
             "--output",
         ],
+        "render" => &[
+            "--universe",
+            "--keys",
+            "--depth",
+            "--max-nodes",
+            "--show-empty",
+            "--successor",
+            "--predecessor",
+            "--output",
+        ],
         _ => return Err(format!("unknown command {command:?}; use --help").into()),
     };
     let mut options = BTreeMap::new();
@@ -59,16 +73,20 @@ fn run() -> Result<(), Box<dyn Error>> {
         if !allowed.contains(&flag.as_str()) {
             return Err(format!("unknown option {flag:?} for {command}").into());
         }
-        let value = args
-            .next()
-            .ok_or_else(|| format!("missing value for {flag}"))?;
+        let value = if flag == "--show-empty" {
+            "true".into()
+        } else {
+            args.next()
+                .ok_or_else(|| format!("missing value for {flag}"))?
+        };
         if options.insert(flag.clone(), value).is_some() {
             return Err(format!("duplicate option {flag}").into());
         }
     }
     let get =
         |flag: &str, default: &str| options.get(flag).cloned().unwrap_or_else(|| default.into());
-    let universes = match get("--universe", "all").as_str() {
+    let universes = match get("--universe", if command == "render" { "16" } else { "all" }).as_str()
+    {
         "all" => vec![16, 256, 65_536],
         value => vec![value.parse::<u32>()?],
     };
@@ -82,6 +100,32 @@ fn run() -> Result<(), Box<dyn Error>> {
             let len = workload::verify(universe, count, seed)?;
             println!("PASS universe={universe} operations={count} seed={seed} final_len={len}");
         }
+    } else if command == "render" {
+        if universes.len() != 1 {
+            return Err("render requires a single universe".into());
+        }
+        let mut set = VebSet::new(universes[0])?;
+        let keys = get("--keys", "2,3,7,9,14");
+        if !keys.is_empty() {
+            for key in keys.split(',') {
+                set.insert(key.trim().parse()?)?;
+            }
+        }
+        let query = match (options.get("--successor"), options.get("--predecessor")) {
+            (Some(_), Some(_)) => return Err("choose either successor or predecessor".into()),
+            (Some(key), None) => Some(Query::Successor(key.parse()?)),
+            (None, Some(key)) => Some(Query::Predecessor(key.parse()?)),
+            (None, None) => None,
+        };
+        let svg = set.to_svg(SvgOptions {
+            max_depth: get("--depth", "4").parse()?,
+            max_nodes: get("--max-nodes", "200").parse()?,
+            show_empty: options.contains_key("--show-empty"),
+            query,
+        })?;
+        let path = get("--output", "output/tree.svg");
+        write_output(&path, &svg)?;
+        println!("Wrote {path}");
     } else {
         let occupancies = match get("--occupancy", "all").as_str() {
             "all" => vec![1, 50, 90],
